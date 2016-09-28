@@ -1,0 +1,24 @@
+{
+  "name": "sastokenapp",
+  "version": "1.0.1",
+  "description": "a basic sas token generation app written in nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agatsa1/MAzure.git"
+  },
+  "keywords": [
+    "sas",
+    "token",
+    "sastoken"
+  ],
+  "author": "brijraj singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agatsa1/MAzure/issues"
+  },
+  "homepage": "https://github.com/agatsa1/MAzure#readme"
+}
