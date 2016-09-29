@@ -28,8 +28,9 @@ module.exports.getSASToken = function getSASToken(req, res) {
     + base64UriEncoded + "&se=" + expires;
     if (policyName) token += "&skn="+policyName;
     console.log("signature:" + token);
-    return token;
-
+    //return token;
+    res.write(token);
+    res.end();
 function minutesFromNow(minutes) {
  var date = new Date();
  date.setMinutes(date.getMinutes() + minutes);
