@@ -41,7 +41,7 @@ var options = {
 
   hostname: 'testagatsa.azure-devices.net',
 
-  path: '/devices/device-01/messages/events?api-version=2016-02-03',
+  path: '/devices/device-02/messages/events?api-version=2016-02-03',
 
   method: 'POST',
 

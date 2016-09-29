@@ -1,37 +1,32 @@
 var crypto = require('crypto');
 var util = require('util');
 var request = require('request');
-var sbNamespace = process.env.SBNAMESPACE || 'iothub-ns-agatsaioth-71484-b43323dbe7';
-var sbEntityPath = process.env.SBENTITYPATH || 'agatsaiothub1';
-var sharedAccessKey = process.env.SENDERS_SHARED_ACCESS_KEY_1 || 'JdhR+tX5TO1r1KYnwS7sLEWIRruYNg68JSlqZEWuEyk='; 
-var sharedAccessKeyName = process.env.SENDER_SHARED_ACCESS_NAME_1 || 'iothubowner';
+var my_uri = process.env.SBNAMESPACE || 'testagatsa.azure-devices.net/messages/events';
+var signingKey = process.env.SENDERS_SHARED_ACCESS_KEY || 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o='; 
+var policyName = process.env.SENDER_POLICY_NAME | 'device';
+
 
 module.exports.getSASToken = function getSASToken(req, res) { 
- /*var uri = "https://" + sbNamespace + 
- ".servicebus.windows.net/" + sbEntityPath + "/publishers/iosDevice/messages";
-var encodedResourceUri = encodeURIComponent(uri);
-var expireInSeconds = Math.round(minutesFromNow(30) / 1000);
-var plainSignature = encodedResourceUri + "\n" + expireInSeconds;
-var signature = crypto.createHmac('sha256', sharedAccessKey)
- .update(plainSignature)
- .digest('base64');
-var sas = util.format('SharedAccessSignature sig=%s&se=%s&skn=%s&sr=%s', 
- encodeURIComponent(signature), expireInSeconds, sharedAccessKeyName, encodedResourceUri);;
- console.log(sas);
- res.send(sas);*/
+ 
+    resourceUri = encodeURIComponent(resourceUri.toLowerCase()).toLowerCase();
 
-  // Token expires in one hour
-    var expiry = moment().add(1, 'hours').unix();
-    var uri = 'https://iothub-ns-testagatsa-71798-cf1e6b8443.servicebus.windows.net/testagatsa/publishers/device1/messages';
-    var key_name = 'device';
-    var key = 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o=';
+    // Set expiration in seconds
+    var expires = (Date.now() / 1000) + expiresInMins * 60;
+    expires = Math.ceil(expires);
+    var toSign = resourceUri + '\n' + expires;
 
-    var string_to_sign = encodeURIComponent(uri) + '\n' + expiry;
-    var hmac = crypto.createHmac('sha256', key);
-    hmac.update(string_to_sign);
-    var signature = hmac.digest('base64');
-    var token = 'SharedAccessSignature sr=' + encodeURIComponent(uri) + '&sig=' + encodeURIComponent(signature) + '&se=' + expiry + '&skn=' + key_name;
+    // using crypto
+    var decodedPassword = new Buffer(signingKey, 'base64').toString('binary');
+    const hmac = crypto.createHmac('sha256', decodedPassword);
+    hmac.update(toSign);
+    var base64signature = hmac.digest('base64');
+    var base64UriEncoded = encodeURIComponent(base64signature);
 
+    // construct autorization string
+    var token = "SharedAccessSignature sr=" + resourceUri + "&sig="
+    + base64UriEncoded + "&se=" + expires;
+    if (policyName) token += "&skn="+policyName;
+    console.log("signature:" + token);
     return token;
 
 function minutesFromNow(minutes) {
