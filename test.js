@@ -32,7 +32,9 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
     return token;
 };
 
-var my_sas = generateSasToken(my_uri, signingKey,policyName,60);
+//var my_sas = generateSasToken(my_uri, signingKey,policyName,60);
+
+var my_sas = 'SharedAccessSignature sr=testagatsa.azure-devices.net%2fmessages%2fevents&sig=zRFEPG%2B%2FNbwSs%2BCHZDnfDWjJjUpbsKCoEE9x0CIl%2FKM%3D&se=1475165641&skn=device';
 
 console.log(my_sas);
 
