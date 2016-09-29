@@ -1,9 +1,10 @@
 var crypto = require('crypto');
 var util = require('util');
 var request = require('request');
-var my_uri = process.env.SBNAMESPACE || 'testagatsa.azure-devices.net/messages/events';
+var resourceUri = process.env.SBNAMESPACE || 'testagatsa.azure-devices.net/messages/events';
 var signingKey = process.env.SENDERS_SHARED_ACCESS_KEY || 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o='; 
 var policyName = process.env.SENDER_POLICY_NAME | 'device';
+var expiresInMins = process.env.EXPIRY_IN_MINS | 60;
 
 
 module.exports.getSASToken = function getSASToken(req, res) { 
