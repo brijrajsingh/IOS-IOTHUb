@@ -2,10 +2,6 @@ var crypto = require('crypto');
 var util = require('util');
 var request = require('request');
 
-var i =1;
-console.log('coming here for ' + i + 'th time');
-i++;
-
 // var resourceUri = process.env.SBNAMESPACE || 'testagatsa.azure-devices.net/messages/events';
 // var signingKey = process.env.SENDERS_SHARED_ACCESS_KEY || 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o='; 
 // var policyName = process.env.SENDER_POLICY_NAME | 'device';
