@@ -10,12 +10,12 @@ i++;
 // var signingKey = process.env.SENDERS_SHARED_ACCESS_KEY || 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o='; 
 // var policyName = process.env.SENDER_POLICY_NAME | 'device';
  var expiresInMins = process.env.EXPIRY_IN_MINS | 60;
-var signingKey = 'jS9qxzF8V/lmCHcOaP9SykPQCIgCSVAjp9mNG4xCZ/o=';
+var signingKey = 'OyOkWugqVGPHoiqFhGBYDZtgYsxaYOweqbKNhqsjGYk=';
 var policyName = 'device';
 
 
 module.exports.getSASToken = function getSASToken(req, res) { 
-var resourceUri = 'testagatsa.azure-devices.net/messages/events'; 
+var resourceUri = 'agatsaiothub1.azure-devices.net/messages/events'; 
  console.log(resourceUri + 'here');
  resourceUri = encodeURIComponent(resourceUri).toLowerCase();
 

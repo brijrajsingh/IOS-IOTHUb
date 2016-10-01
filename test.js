@@ -34,14 +34,17 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
 
 //var my_sas = generateSasToken(my_uri, signingKey,policyName,60);
 
-var my_sas = 'SharedAccessSignature sr=testagatsa.azure-devices.net%2fmessages%2fevents&sig=zRFEPG%2B%2FNbwSs%2BCHZDnfDWjJjUpbsKCoEE9x0CIl%2FKM%3D&se=1475165641&skn=device';
+//var my_sas = 'SharedAccessSignature sr=testagatsa.azure-devices.net%2fmessages%2fevents&sig=zRFEPG%2B%2FNbwSs%2BCHZDnfDWjJjUpbsKCoEE9x0CIl%2FKM%3D&se=1475165641&skn=device';
+
+var my_sas = 'SharedAccessSignature sr=agatsaiothub1.azure-devices.net%2fmessages%2fevents&sig=foMy%2Fr71vkE42PNIhGfwg7zo86Uzkb8ncqCuL8CWnqE%3D&se=1475336032&skn=device';
+
 
 console.log(my_sas);
 
 // Send the request to the Event Hub
 var options = {
 
-  hostname: 'testagatsa.azure-devices.net',
+  hostname: 'agatsaiothub1.azure-devices.net',
 
   path: '/devices/device-01/messages/events?api-version=2016-02-03',
 
