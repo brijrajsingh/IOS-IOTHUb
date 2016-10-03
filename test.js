@@ -36,13 +36,13 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
 
 //var my_sas = 'SharedAccessSignature sr=testagatsa.azure-devices.net%2fmessages%2fevents&sig=zRFEPG%2B%2FNbwSs%2BCHZDnfDWjJjUpbsKCoEE9x0CIl%2FKM%3D&se=1475165641&skn=device';
 
-var my_sas = 'SharedAccessSignature sr=agatsaiothub1.azure-devices.net%2fmessages%2fevents&sig=foMy%2Fr71vkE42PNIhGfwg7zo86Uzkb8ncqCuL8CWnqE%3D&se=1475336032&skn=device';
+var my_sas = 'SharedAccessSignature sr=agatsaiothub1.azure-devices.net%2fdevices&sig=fpQb8GZDnzLPbVqQMX4BsxjTgktSGiHMz6X0%2FI2MX4k%3D&se=1475503400&skn=iothubowner';
 
 
 console.log(my_sas);
 
 // Send the request to the Event Hub
-var options = {
+/*var options = {
 
   hostname: 'agatsaiothub1.azure-devices.net',
 
@@ -60,6 +60,20 @@ var options = {
 
   }
 
+};*/
+
+payload =  '{\"deviceId\":\"device3\"}';
+
+//for creating the device identity
+var options = {
+  hostname: 'agatsaiothub1.azure-devices.net',
+  path: '/devices/device3?api-version=2016-02-03',
+  method: 'PUT',
+  headers: {
+    'Authorization': my_sas,
+    'Content-Length': payload.length,
+    'Content-Type': 'application/json'
+  }
 };
 
 
@@ -69,8 +83,6 @@ var req = https.request(options, function(res) {
   console.log("statusCode: ", res.statusCode);
 
   console.log("headers: ", res.headers);
-
-
 
   res.on('data', function(d) {
 

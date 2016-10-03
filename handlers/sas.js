@@ -11,7 +11,16 @@ var policyName = 'device';
 
 
 module.exports.getSASToken = function getSASToken(req, res) { 
-var resourceUri = 'agatsaiothub1.azure-devices.net/messages/events'; 
+    console.log(req.query.op);
+    var op = req.query.op;
+    var resourceUri = 'agatsaiothub1.azure-devices.net/messages/events'; 
+    if(op != null && op == 'registerdevice')
+    {
+        resourceUri = 'agatsaiothub1.azure-devices.net/devices';
+        signingKey = 'JdhR+tX5TO1r1KYnwS7sLEWIRruYNg68JSlqZEWuEyk=';
+        policyName = 'iothubowner';
+    }
+
  console.log(resourceUri + 'here');
  resourceUri = encodeURIComponent(resourceUri).toLowerCase();
 
